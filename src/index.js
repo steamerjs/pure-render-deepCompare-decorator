@@ -4,6 +4,8 @@
 
 'use strict';
 
+var maxDep = 6; // 比较的最大深度
+
 /**
  * [type utils]
  * @type {Array}
@@ -22,15 +24,15 @@ for (var i = 0; i < jsType.length; i++) {
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-
 /**
  * [value compare]
- * @param  {[type]} valA [description]
- * @param  {[type]} valB [description]
- * @return {[type]}      [description]
+ * @param  {[type]} valA  [description]
+ * @param  {[type]} valB  [description]
+ * @param  {[type]} depth [description]
+ * @return {[type]}       [description]
  */
-function valCompare(valA, valB) {
-
+function valCompare(valA, valB, depth) {
+    
     if (dUtil.isFunction(valA)) {
         if (valA.hasOwnProperty('name') && valB.hasOwnProperty('name') 
             && valA.name === valB.name) {
@@ -47,7 +49,7 @@ function valCompare(valA, valB) {
     }
 
     if (dUtil.isObject(valA) || dUtil.isArray(valA)) {
-        return deepEqual(valA, valB);
+        return deepEqual(valA, valB, depth);
     }
 
     if (valA !== valB) {
@@ -72,11 +74,17 @@ function skipKeys(key) {
 
 /**
  * [test whether two values are equal]
- * @param  {[type]} objA [description]
- * @param  {[type]} objB [description]
- * @return {[type]}      [description]
+ * @param  {[type]} objA  [description]
+ * @param  {[type]} objB  [description]
+ * @param  {[type]} depth [description]
+ * @return {[type]}       [description]
  */
-function deepEqual(objA, objB) {
+function deepEqual(objA, objB, depth) {
+    if (depth > maxDep) {
+        return false;
+    }
+
+    ++depth;
 
     if (!dUtil.isObject(objA) && !dUtil.isArray(objB)) {
         if (!valCompare(objA, objB)) {
@@ -86,6 +94,8 @@ function deepEqual(objA, objB) {
 
     var keysA = Object.keys(objA);
     var keysB = Object.keys(objB);
+
+    // console.log(keysA);
 
     if (keysA.length !== keysB.length) {
         return false;
@@ -105,7 +115,7 @@ function deepEqual(objA, objB) {
             return false;
         }
 
-        if (!valCompare(comPareValA, comPareValB)) {
+        if (!valCompare(comPareValA, comPareValB, depth)) {
             return false;
         }
 
@@ -122,7 +132,7 @@ function deepEqual(objA, objB) {
  * @return {[type]}           [description]
  */
 function deepCompare(instance, nextProps, nextState) {
-    var result = !deepEqual(instance.props, nextProps) || !deepEqual(instance.state, nextState);
+    var result = !deepEqual(instance.props, nextProps, 1) || !deepEqual(instance.state, nextState, 1);
     return result;
 }
 
