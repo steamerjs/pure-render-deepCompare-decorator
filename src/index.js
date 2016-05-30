@@ -59,11 +59,18 @@ function valCompare(valA, valB, depth) {
     return true;
 }
 
+/**
+ * [Not to be compared properties]
+ * @param  {[type]} key [description]
+ * @return {[type]}     [description]
+ */
 function skipKeys(key) {
     var keyMaps = {
         '$$typeof': 1,
         '_owner': 1,
         '_store': 1,
+        '_self': 1,
+        '_source': 1,
     };
 
     if (keyMaps[key]) {
@@ -95,7 +102,6 @@ function deepEqual(objA, objB, depth) {
     var keysA = Object.keys(objA);
     var keysB = Object.keys(objB);
 
-    // console.log(keysA);
 
     if (keysA.length !== keysB.length) {
         return false;
@@ -106,7 +112,10 @@ function deepEqual(objA, objB, depth) {
         var comPareValA = objA[keysA[i]],
             comPareValB = objB[keysB[i]];
 
-        if (keysA[0] === '$$typeof' && skipKeys(keysA[i])) {
+        if (keysA[0] === '$$typeof' && keysA[i] === 'children') {
+            return true;
+        }
+        else if (keysA[0] === '$$typeof' && skipKeys(keysA[i])) {
             continue;
         }
 
