@@ -17,7 +17,7 @@ let hasOwnProperty = Object.prototype.hasOwnProperty;
  * when any key has values which are not strictly equal between the arguments.
  * Returns true when the values of all keys are strictly equal.
  */
-function shallowEqual(objA, objB) {
+function deepEqual(objA, objB) {
     if (objA === objB || is(objA, objB)) {
         return true;
     }
@@ -45,11 +45,11 @@ function shallowEqual(objA, objB) {
 }
 
 /**
- * Does a shallow comparison for props and state.
+ * Does a deep comparison for props and state.
  * See ReactComponentWithPureRenderMixin
  */
-function shallowCompare(instance, nextProps, nextState) {
-    return !shallowEqual(instance.props, nextProps) || !shallowEqual(instance.state, nextState);
+export function deepCompare(instance, nextProps, nextState) {
+    return !deepEqual(instance.props, nextProps) || !deepEqual(instance.state, nextState);
 }
 
 /**
@@ -60,7 +60,7 @@ function shallowCompare(instance, nextProps, nextState) {
  * @param object nextState Next state.
  */
 function shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
+    return deepCompare(this, nextProps, nextState);
 }
 
 /**
@@ -73,4 +73,4 @@ function pureRenderDecorator(component) {
 }
 
 
-module.exports = pureRenderDecorator;
+export default pureRenderDecorator;
