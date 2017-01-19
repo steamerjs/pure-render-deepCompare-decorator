@@ -25,7 +25,9 @@
   ],
   "author": "heyli",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "immutable": "^3.8.1"
+  },
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
