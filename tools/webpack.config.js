@@ -21,6 +21,9 @@ var devConfig = {
                 loader: 'babel',
                 query: {
                     cacheDirectory: './.webpack_cache/',
+                    plugins: [
+                        'transform-decorators-legacy'
+                    ],
                     presets: [
                         ["es2015", {"loose": true}],
                         'react',
