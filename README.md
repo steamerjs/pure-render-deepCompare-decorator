@@ -5,7 +5,7 @@ compare props and state automatically
 
 ### Usage
 
-1. Non-immutable version
+* Non-immutable version
 
 If you don't care the data in `shouldComponentUpdate`, you can just use the decorator way. But you have to instll `babel-plugin-transform-decorators-legacy` plugin for compilation.
 
@@ -58,7 +58,7 @@ class List extends Component {
 
 ```
 
-2. Immutable version
+* Immutable version
 
 ```
 import pureRenderDecorator, { deepCompare } from "pure-render-deepcompare-decorator";
