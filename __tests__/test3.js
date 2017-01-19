@@ -24,20 +24,20 @@ const wrapper = shallow(
   	<Wrapper />
 );
 
-var instance = makeInstance(scroll.state(), {children: list});
+// var instance = makeInstance(scroll.state(), wrapper.find(scroll).props());
 
 test('all data is the same', () => {
 
-	console.log(instance);
+	console.log(list.instance()._reactInternalInstance);
 
-	let result = deepCompare(instance, {
-		title: "dota2 hero",
-		subtitle: "Agility",
-		heroes: AgilityHeroes1,
-	}, {
-		subtitle: "Strength",
-		heroes: Strengthheroes1
-	});
+	// let result = deepCompare(instance, {
+	// 	title: "dota2 hero",
+	// 	subtitle: "Agility",
+	// 	heroes: AgilityHeroes1,
+	// }, {
+	// 	subtitle: "Strength",
+	// 	heroes: Strengthheroes1
+	// });
 
 	expect(false).toBe(false);
 
