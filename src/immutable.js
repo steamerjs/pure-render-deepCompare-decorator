@@ -1,5 +1,7 @@
-By polarjiang
-github: https://github.com/tiger02
+/**
+ * [immutable version]
+ * github: https://github.com/tiger02
+ */
 
 /**
  * pure render decorator immutable版
