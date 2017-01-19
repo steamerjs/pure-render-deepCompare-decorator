@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import pureRender from '../lib/';
 
+export const ele = <div></div>;
+
+
 @pureRender
 export class Scroll extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
-			ele: <div></div>
+			ele: ele
 		}
 	}
 
 	render() {
-
-		console.log(this.props);
 
 		return (
 			<div>

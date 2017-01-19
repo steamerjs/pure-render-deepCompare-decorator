@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "236adf36dbd41e84f2e2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7b33ddf213e73690d9f7"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -585,7 +585,8 @@
 
 	'use strict';
 
-	var _class;
+	exports.__esModule = true;
+	exports.default = exports.List = undefined;
 
 	var _react = __webpack_require__(178);
 
@@ -605,60 +606,18 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var List = function (_Component) {
+	// @pureRender
+	var List = exports.List = function (_Component) {
 		_inherits(List, _Component);
 
 		function List(props, context) {
 			_classCallCheck(this, List);
 
-			var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
-
-			_this.state = {
-				heroes: [{
-					id: 1,
-					name: "Earthshaker"
-				}, {
-					id: 2,
-					name: "Sven"
-				}, {
-					id: 3,
-					name: "Tiny"
-				}, {
-					id: 4,
-					name: "Kunkka"
-				}]
-			};
-
-			// this.heros = [
-			// 	{
-			// 		id: 1,
-			// 		name: "Earthshaker"
-			// 	},
-			// 	{
-			// 		id: 2,
-			// 		name: "Sven"
-			// 	},
-			// 	{
-			// 		id: 3,
-			// 		name: "Tiny"
-			// 	},
-			// 	{
-			// 		id: 4,
-			// 		name: "Kunkka"
-			// 	},
-			// 	{
-			// 		id: 5,
-			// 		name: "BeastMaster"
-			// 	},
-			// 	{
-			// 		id: 6,
-			// 		name: "Dragon Knight"
-			// 	},
-			// ];
-			return _this;
+			return _possibleConstructorReturn(this, _Component.call(this, props, context));
 		}
 
-		List.prototype.shouldComponentUpdate = function shouldComponentUpdate() {
+		List.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+			console.log(nextProps, nextState);
 			return true;
 		};
 
@@ -666,52 +625,60 @@
 
 		List.prototype.render = function render() {
 
-			console.log(this.state.heroes);
-			return _react2.default.createElement(
-				'ul',
-				null,
-				this.state.heroes.map(function (item) {
-					return _react2.default.createElement(
-						'li',
-						{ key: item.id },
-						item.name
-					);
-				})
-			);
+			console.log(this.props.ele);
+
+			return _react2.default.createElement('div', null);
 		};
 
 		return List;
 	}(_react.Component);
 
-	var Wrapper = (0, _lib2.default)(_class = function (_Component2) {
-		_inherits(Wrapper, _Component2);
+	var El = function (_Component2) {
+		_inherits(El, _Component2);
+
+		function El(props, context) {
+			_classCallCheck(this, El);
+
+			return _possibleConstructorReturn(this, _Component2.call(this, props, context));
+		}
+
+		El.prototype.render = function render() {
+
+			console.log(this.props.ele);
+
+			return _react2.default.createElement('div', null);
+		};
+
+		return El;
+	}(_react.Component);
+
+	var Wrapper = function (_Component3) {
+		_inherits(Wrapper, _Component3);
 
 		function Wrapper(props, context) {
 			_classCallCheck(this, Wrapper);
 
-			var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
-
-			_this2.state = {};
-			return _this2;
+			return _possibleConstructorReturn(this, _Component3.call(this, props, context));
 		}
 
 		Wrapper.prototype.componentDidMount = function componentDidMount() {};
-
-		Wrapper.prototype.shouldComponentUpdate = function shouldComponentUpdate() {
-			return false;
-		};
 
 		Wrapper.prototype.render = function render() {
 
 			return _react2.default.createElement(
 				'div',
 				null,
-				_react2.default.createElement(List, null)
+				_react2.default.createElement(List, {
+					ele: _react2.default.createElement(El, null)
+				})
 			);
 		};
 
 		return Wrapper;
-	}(_react.Component)) || _class;
+	}(_react.Component);
+
+	exports.default = Wrapper;
+
 
 	(0, _reactDom.render)(_react2.default.createElement(Wrapper, null), document.getElementById('root'));
 
@@ -10007,164 +9974,173 @@
 
 	'use strict';
 
-	exports.__esModule = true;
-	var pureRenderDecorator = function () {
-	    var maxDep = 6; // 比较的最大深度
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.deepCompare = deepCompare;
+	var maxDep = 6; // 比较的最大深度
 
-	    /**
-	     * [type utils]
-	     * @type {Array}
-	     */
-	    var jsType = ["Boolean", "Number", "String", "Function", "Array", "Date", "RegExp", "Object", "Error"];
-	    var dUtil = {};
+	/**
+	 * [type utils]
+	 * @type {Array}
+	 */
+	var jsType = ["Boolean", "Number", "String", "Function", "Array", "Date", "RegExp", "Object", "Error"];
+	var dUtil = {};
 
-	    for (var i = 0; i < jsType.length; i++) {
-	        (function (k) {
-	            dUtil['is' + jsType[k]] = function (obj) {
-	                return Object.prototype.toString.call(obj) === '[object ' + jsType[k] + ']';
-	            };
-	        })(i);
-	    }
+	for (var i = 0; i < jsType.length; i++) {
+	    (function (k) {
+	        dUtil['is' + jsType[k]] = function (obj) {
+	            return Object.prototype.toString.call(obj) === '[object ' + jsType[k] + ']';
+	        };
+	    })(i);
+	}
 
-	    var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-	    /**
-	     * [value compare]
-	     * @param  {[type]} valA  [description]
-	     * @param  {[type]} valB  [description]
-	     * @param  {[type]} depth [description]
-	     * @return {[type]}       [description]
-	     */
-	    function valCompare(valA, valB, depth) {
+	/**
+	 * [value compare]
+	 * @param  {[type]} valA  [description]
+	 * @param  {[type]} valB  [description]
+	 * @param  {[type]} depth [description]
+	 * @return {[type]}       [description]
+	 */
+	function valCompare(valA, valB, depth) {
 
-	        if (dUtil.isFunction(valA)) {
-	            if (valA.hasOwnProperty('name') && valB.hasOwnProperty('name') && valA.name === valB.name) {
-	                return true;
-	            }
-	            return false;
-	        }
-
-	        if (dUtil.isString(valA) || dUtil.isNumber(valA) || dUtil.isBoolean(valA) || dUtil.isDate(valA)) {
-	            if (valA !== valB) {
-	                return false;
-	            }
+	    if (dUtil.isFunction(valA)) {
+	        if (valA.hasOwnProperty('name') && valB.hasOwnProperty('name') && valA.name === valB.name) {
 	            return true;
 	        }
+	        return false;
+	    }
 
-	        if (dUtil.isObject(valA) || dUtil.isArray(valA)) {
-	            return deepEqual(valA, valB, depth);
-	        }
-
+	    if (dUtil.isString(valA) || dUtil.isNumber(valA) || dUtil.isBoolean(valA)) {
 	        if (valA !== valB) {
 	            return false;
 	        }
+	        return true;
+	    }
+
+	    if (dUtil.isDate(valA)) {
+	        if (valA.getTime() !== valB.getTime()) {
+	            return false;
+	        }
 
 	        return true;
 	    }
 
-	    /**
-	     * [Not to be compared properties]
-	     * @param  {[type]} key [description]
-	     * @return {[type]}     [description]
-	     */
-	    function skipKeys(key) {
-	        var keyMaps = {
-	            '$$typeof': 1,
-	            '_owner': 1,
-	            '_store': 1,
-	            '_self': 1,
-	            '_source': 1
-	        };
+	    if (dUtil.isObject(valA) || dUtil.isArray(valA)) {
+	        return deepEqual(valA, valB, depth);
+	    }
 
-	        if (keyMaps[key]) {
+	    if (valA !== valB) {
+	        return false;
+	    }
+
+	    return true;
+	}
+
+	/**
+	 * [Not to be compared properties]
+	 * @param  {[type]} key [description]
+	 * @return {[type]}     [description]
+	 */
+	function skipKeys(key) {
+	    var keyMaps = {
+	        '$$typeof': 1,
+	        '_owner': 1,
+	        '_store': 1,
+	        '_self': 1,
+	        '_source': 1
+	    };
+
+	    if (keyMaps[key]) {
+	        return true;
+	    }
+	}
+
+	/**
+	 * [test whether two values are equal]
+	 * @param  {[type]} objA  [description]
+	 * @param  {[type]} objB  [description]
+	 * @param  {[type]} depth [description]
+	 * @return {[type]}       [description]
+	 */
+	function deepEqual(objA, objB, depth) {
+	    if (depth > maxDep) {
+	        return false;
+	    }
+
+	    ++depth;
+
+	    if (!dUtil.isObject(objA) && !dUtil.isArray(objB)) {
+	        if (!valCompare(objA, objB)) {
+	            return false;
+	        }
+	    }
+
+	    var keysA = Object.keys(objA || {});
+	    var keysB = Object.keys(objB || {});
+
+	    if (keysA.length !== keysB.length) {
+	        return false;
+	    }
+
+	    for (var i = 0; i < keysA.length; i++) {
+
+	        var comPareValA = objA[keysA[i]],
+	            comPareValB = objB[keysB[i]];
+
+	        if (keysA[0] === '$$typeof' && keysA[i] === 'children') {
 	            return true;
+	        } else if (keysA[0] === '$$typeof' && skipKeys(keysA[i])) {
+	            continue;
 	        }
-	    }
 
-	    /**
-	     * [test whether two values are equal]
-	     * @param  {[type]} objA  [description]
-	     * @param  {[type]} objB  [description]
-	     * @param  {[type]} depth [description]
-	     * @return {[type]}       [description]
-	     */
-	    function deepEqual(objA, objB, depth) {
-	        if (depth > maxDep) {
+	        var bHasOwnProperty = hasOwnProperty.bind(objB);
+	        if (!bHasOwnProperty(keysA[i])) {
 	            return false;
 	        }
 
-	        ++depth;
-
-	        if (!dUtil.isObject(objA) && !dUtil.isArray(objB)) {
-	            if (!valCompare(objA, objB)) {
-	                return false;
-	            }
-	        }
-
-	        var keysA = Object.keys(objA);
-	        var keysB = Object.keys(objB);
-
-	        if (keysA.length !== keysB.length) {
+	        if (!valCompare(comPareValA, comPareValB, depth)) {
 	            return false;
 	        }
-
-	        for (var i = 0; i < keysA.length; i++) {
-
-	            var comPareValA = objA[keysA[i]],
-	                comPareValB = objB[keysB[i]];
-
-	            if (keysA[0] === '$$typeof' && keysA[i] === 'children') {
-	                return true;
-	            } else if (keysA[0] === '$$typeof' && skipKeys(keysA[i])) {
-	                continue;
-	            }
-
-	            var bHasOwnProperty = hasOwnProperty.bind(objB);
-	            if (!bHasOwnProperty(keysA[i])) {
-	                return false;
-	            }
-
-	            if (!valCompare(comPareValA, comPareValB, depth)) {
-	                return false;
-	            }
-	        }
-
-	        return true;
 	    }
 
-	    /**
-	     * [compare props and state]
-	     * @param  {[type]} instance  [description]
-	     * @param  {[type]} nextProps [description]
-	     * @param  {[type]} nextState [description]
-	     * @return {[type]}           [description]
-	     */
-	    function deepCompare(instance, nextProps, nextState) {
-	        var result = !deepEqual(instance.props, nextProps, 1) || !deepEqual(instance.state, nextState, 1);
-	        return result;
-	    }
+	    return true;
+	}
 
-	    /**
-	     * [rewite shouldComponentUpdate]
-	     * @param  {[type]} nextProps [description]
-	     * @param  {[type]} nextState [description]
-	     * @return {[type]}           [description]
-	     */
-	    function shouldComponentUpdate(nextProps, nextState) {
-	        return deepCompare(this, nextProps, nextState);
-	    }
+	/**
+	 * [compare props and state]
+	 * @param  {[type]} instance  [description]
+	 * @param  {[type]} nextProps [description]
+	 * @param  {[type]} nextState [description]
+	 * @return {[type]}           [description]
+	 */
+	function deepCompare(instance, nextProps, nextState) {
+	    // console.log(instance.props, nextProps);
+	    // console.log(instance.state,  nextState);
+	    var result = !deepEqual(instance.props, nextProps, 1) || !deepEqual(instance.state, nextState, 1);
+	    return result;
+	}
 
-	    /**
-	     * [decorator wrapper]
-	     * @param  {[type]} component [description]
-	     * @return {[type]}           [description]
-	     */
-	    function pureRenderDecorator(component) {
-	        component.prototype.shouldComponentUpdate = shouldComponentUpdate;
-	    }
+	/**
+	 * [rewite shouldComponentUpdate]
+	 * @param  {[type]} nextProps [description]
+	 * @param  {[type]} nextState [description]
+	 * @return {[type]}           [description]
+	 */
+	function shouldComponentUpdate(nextProps, nextState) {
+	    return deepCompare(this, nextProps, nextState);
+	}
 
-	    return pureRenderDecorator;
-	}();
+	/**
+	 * [decorator wrapper]
+	 * @param  {[type]} component [description]
+	 * @return {[type]}           [description]
+	 */
+	function pureRenderDecorator(component) {
+	    component.prototype.shouldComponentUpdate = shouldComponentUpdate;
+	}
 
 	exports.default = pureRenderDecorator;
 

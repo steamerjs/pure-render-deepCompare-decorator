@@ -22,8 +22,6 @@ for (var i = 0; i < jsType.length; i++) {
     )(i);
 }
 
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
 /**
  * [value compare]
  * @param  {[type]} valA  [description]
@@ -127,8 +125,7 @@ function deepEqual(objA, objB, depth) {
             continue;
         }
 
-        var bHasOwnProperty = hasOwnProperty.bind(objB);
-        if (!bHasOwnProperty(keysA[i])) {
+        if (!objB.hasOwnProperty(keysA[i])) {
             return false;
         }
 

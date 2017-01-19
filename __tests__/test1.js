@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Wrapper, { List } from '../example';
+import Wrapper, { List } from '../example/index1';
 import { deepCompare } from "../lib";
 
 

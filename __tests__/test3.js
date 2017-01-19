@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Wrapper, { List, Scroll } from '../example/index3';
+import Wrapper, { List, Scroll, ele } from '../example/index3';
 import { deepCompare } from "../lib";
 
 
@@ -24,81 +24,46 @@ const wrapper = shallow(
   	<Wrapper />
 );
 
-// var instance = makeInstance(scroll.state(), wrapper.find(scroll).props());
+var listEle = list.instance()._reactInternalInstance._currentElement,
+	scrollEle = scroll.instance()._reactInternalInstance._currentElement,
+	newEle = <p></p>;
+
+var instance = makeInstance(scroll.state(), {children: listEle});
 
 test('all data is the same', () => {
 
-	console.log(list.instance()._reactInternalInstance);
+	// console.log(instance);
 
-	// let result = deepCompare(instance, {
-	// 	title: "dota2 hero",
-	// 	subtitle: "Agility",
-	// 	heroes: AgilityHeroes1,
-	// }, {
-	// 	subtitle: "Strength",
-	// 	heroes: Strengthheroes1
-	// });
+	let result = deepCompare(instance, {
+		children: listEle
+	}, {
+		ele: ele
+	});
 
-	expect(false).toBe(false);
+	expect(result).toBe(false);
 
 });
 
-// test('props.title different -- String', () => {
+test('props.children is different', () => {
 
-// 	let result = deepCompare(instance, {
-// 		title: "dota2 heroes",
-// 		subtitle: "Agility",
-// 		heroes: AgilityHeroes1,
-// 	}, {
-// 		subtitle: "Strength",
-// 		heroes: Strengthheroes1
-// 	});
+	let result = deepCompare(instance, {
+		children: scrollEle
+	}, {
+		ele: ele
+	});
 
-// 	expect(result).toBe(true);
+	expect(result).toBe(true);
 
-// });
+});
 
-// test('state.subtitle different -- String', () => {
+test('state.ele is different', () => {
 
-// 	let result = deepCompare(instance, {
-// 		title: "dota2 hero",
-// 		subtitle: "Agility",
-// 		heroes: AgilityHeroes1,
-// 	}, {
-// 		subtitle: "Strengths",
-// 		heroes: Strengthheroes1
-// 	});
+	let result = deepCompare(instance, {
+		children: listEle
+	}, {
+		ele: newEle
+	});
 
-// 	expect(result).toBe(true);
+	expect(result).toBe(true);
 
-// });
-
-// test('props.heroes different -- Array & Object', () => {
-
-// 	let result = deepCompare(instance, {
-// 		title: "dota2 hero",
-// 		subtitle: "Agility",
-// 		heroes: AgilityHeroes2,
-// 	}, {
-// 		subtitle: "Strength",
-// 		heroes: Strengthheroes1
-// 	});
-
-// 	expect(result).toBe(true);
-
-// });
-
-// test('state.heroes different -- Array & Object', () => {
-
-// 	let result = deepCompare(instance, {
-// 		title: "dota2 hero",
-// 		subtitle: "Agility",
-// 		heroes: AgilityHeroes1,
-// 	}, {
-// 		subtitle: "Strength",
-// 		heroes: Strengthheroes2
-// 	});
-
-// 	expect(result).toBe(true);
-
-// });
+});
