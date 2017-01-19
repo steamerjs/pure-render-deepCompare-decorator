@@ -1,6 +1,6 @@
 {
   "name": "pure-render-deepcompare-decorator",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "pure render decorator, deep comparison",
   "main": "./lib/index.js",
   "scripts": {
