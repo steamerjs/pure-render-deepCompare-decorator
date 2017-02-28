@@ -25,9 +25,7 @@
   ],
   "author": "heyli",
   "license": "ISC",
-  "dependencies": {
-    "immutable": "^3.8.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
@@ -43,11 +41,15 @@
     "eslint": "^3.13.0",
     "eslint-plugin-babel": "^4.0.0",
     "eslint-plugin-react": "^6.8.0",
+    "immutable": "^3.8.1",
     "jest": "^18.1.0",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-test-renderer": "^15.4.2",
     "webpack": "^1.14.0"
+  },
+  "peerDependencies": {
+    "immutable": "3.x"
   }
 }
