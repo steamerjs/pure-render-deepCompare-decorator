@@ -1,0 +1,5 @@
+yarn-error.log
+jest
+dev
+__tests__
+.DS_Store

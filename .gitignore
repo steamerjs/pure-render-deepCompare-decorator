@@ -1,5 +1,7 @@
 node_modules
 .webpack_cache
 yarn-error.log
+npm-debug.log
 jest
 dev
+.DS_Store

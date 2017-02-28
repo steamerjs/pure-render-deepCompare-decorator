@@ -57,9 +57,3 @@ class List extends Component {
 }
 
 ```
-
-* Immutable version
-
-```
-import pureRenderDecorator, { deepCompare } from "pure-render-deepcompare-decorator";
-```
