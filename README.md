@@ -5,9 +5,7 @@ compare props and state automatically
 
 ### Usage
 
-* Non-immutable version
-
-If you don't care the data in `shouldComponentUpdate`, you can just use the decorator way. But you have to instll `babel-plugin-transform-decorators-legacy` plugin for compilation.
+If you don't care the data in `shouldComponentUpdate`, you can just use the decorator way. But you have to install `babel-plugin-transform-decorators-legacy` plugin for compilation.
 
 ```
 import pureRenderDecorator from "pure-render-deepcompare-decorator";

@@ -146,8 +146,6 @@ function deepEqual(objA, objB, depth) {
  * @return {[type]}           [description]
  */
 export function deepCompare(instance, nextProps, nextState) {
-    // console.log(instance.props, nextProps);
-    // console.log(instance.state,  nextState);
     var result = !deepEqual(instance.props, nextProps, 1) || !deepEqual(instance.state, nextState, 1);
     return result;
 }
