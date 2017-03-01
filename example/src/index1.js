@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import pureRender from '../../dist/';
+import pureRender from '../../src/';
 
 
 @pureRender
