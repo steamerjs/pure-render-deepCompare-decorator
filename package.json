@@ -10,7 +10,7 @@
     "dev.code": "npm run start.code",
     "dist": "babel src --out-dir dist --copy-files",
     "prepublish": "npm run dist",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint src/*.js"
   },
   "repository": {
