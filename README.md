@@ -62,3 +62,6 @@ class List extends Component {
 }
 
 ```
+
+### Immutable Version
+* [pure-render-immutable-decorator](https://github.com/SteamerTeam/pure-render-immutable-decorator)
