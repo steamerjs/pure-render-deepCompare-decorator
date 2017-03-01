@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Wrapper, { List, add } from '../example/src/index2';
-import { deepCompare } from "../dist";
+import { deepCompare } from "../src";
 
 
 function makeInstance(state, props) {
