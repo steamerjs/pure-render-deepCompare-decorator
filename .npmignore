@@ -1,0 +1,12 @@
+node_modules
+node_modules.7z
+example
+.DS_Store
+.webpack_cache
+.happypack
+npm-debug.log
+yarn-error.log
+jest
+tools
+config
+__tests__
