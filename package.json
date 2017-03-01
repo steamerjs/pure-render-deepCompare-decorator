@@ -11,7 +11,7 @@
     "dist": "babel src --out-dir dist --copy-files",
     "prepublish": "npm run dist",
     "test": "jest",
-    "lint": "eslint src/**/*.js && stylelint src/**/*.less"
+    "lint": "eslint src/*.js"
   },
   "repository": {
     "type": "git",
