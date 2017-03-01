@@ -3,12 +3,19 @@
 compare props and state automatically
 
 
+### Install
+
+```
+$ npm install pure-render-deepcompare-decorator --save
+```
+
+
 ### Usage
 
 If you don't care the data in `shouldComponentUpdate`, you can just use the decorator way. But you have to install `babel-plugin-transform-decorators-legacy` plugin for compilation.
 
-```
-import pureRenderDecorator from "pure-render-deepcompare-decorator";
+```js
+import pureRender from "pure-render-deepcompare-decorator";
 
 @pureRender
 class List extends Component {
@@ -28,7 +35,7 @@ class List extends Component {
 
 If you need to modify logic in `shouldComponentUpdate`, you can use it like this:
 
-```
+```js
 import { deepCompare } from "pure-render-deepcompare-decorator";
 
 class List extends Component {
